@@ -1,0 +1,26 @@
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost/db_springboot_backend
+    username: 'user'
+    password: 'password'
+  jackson:
+    time-zone: America/Mexico_City
+    locale: es_MX
+  servlet:
+    multipart:
+      max-request-size: 2MB
+      max-file-size: 2MB
+  jpa:
+    database-platform: org.hibernate.dialect.MySQLDialect
+    hibernate:
+      ddl-auto: create-drop
+logging:
+  level:
+    org:
+      hibernate:
+        SQL: debug
+      springframework: trace
+
+auth:
+  default-role-set: USER,ADMIN
