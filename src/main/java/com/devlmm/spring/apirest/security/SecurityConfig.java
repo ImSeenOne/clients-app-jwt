@@ -1,5 +1,6 @@
 package com.devlmm.spring.apirest.security;
 
+import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -30,9 +31,9 @@ public class SecurityConfig {
                 .csrf()
                 .disable()
                 .authorizeHttpRequests()
-                .requestMatchers("/api/dev-lmm/auth/**")
+                .requestMatchers("/api/auth/authenticate", "/api/auth/register")
                 .permitAll()
-                .anyRequest()
+                .requestMatchers("/api/clientes**")
                 .authenticated()
                 .and()
                 .sessionManagement()
@@ -40,9 +41,8 @@ public class SecurityConfig {
                 .and()
                 .authenticationProvider(authenticationProvider)
                 .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class)
-                //.addFilterAfter(authorizationFilter, JwtAuthenticationFilter.class)
                 .logout()
-                .logoutUrl("/api/dev-lmm/auth/logout")
+                .logoutUrl("/api/auth/logout")
                 .addLogoutHandler(logoutHandler)
                 .logoutSuccessHandler((request, response, authentication) -> SecurityContextHolder.clearContext());
 

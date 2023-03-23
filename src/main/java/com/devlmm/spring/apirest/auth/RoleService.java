@@ -16,7 +16,7 @@ public class RoleService {
     private final IRoleDao roleDao;
 
     public Role getRoleByName(String name) {
-        return roleDao.findByName(name).orElseThrow();
+        return roleDao.findByName(name).orElse(null);
     }
 
     public Role getRoleById(Long id) {
